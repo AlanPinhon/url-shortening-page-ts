@@ -1,23 +1,28 @@
-import { ChangeEvent } from 'react';
-import { useFetch } from '../../helpers/useFetch';
+import { FormEvent,ChangeEvent, useState } from 'react';
+import { getShortedLink } from '../../helpers/getShortedLink';
 
 export const LinkInput = () => {
 
-  useFetch();
+  const [inputValue, setInputValue] = useState('');
 
-  const handleInputValue = ({target}:ChangeEvent<HTMLInputElement>) => {
-    console.log(target.value);
+  const handleInputValue = ({ target }:ChangeEvent<HTMLInputElement>) => {
+    const newURL = target.value;
+    setInputValue(newURL);
+  }
+
+  const onSubmit = (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    getShortedLink(inputValue);
+    setInputValue('');
   }
 
   return (
-    <>
-      <div className="link-input-container">
-        <form id='shorten-link-form' className='shorten-link-form'>
-          <input onChange={handleInputValue} type="text" placeholder="Shorten a link here..."/>
-          <button className="shorten-btn">Shorten it!</button>
-        </form>
-      </div>
-    </>
+    <div className="link-input-container">
+      <form id='shorten-link-form' className='shorten-link-form' onSubmit={onSubmit}>
+        <input onChange={handleInputValue} type="text" value={inputValue} placeholder="Shorten a link here..."/>
+        <button type='submit' className="shorten-btn">Shorten it!</button>
+      </form>
+    </div>
   )
 
 }
