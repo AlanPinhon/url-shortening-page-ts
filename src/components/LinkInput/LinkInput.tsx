@@ -1,6 +1,9 @@
 import { ChangeEvent } from 'react';
+import { useFetch } from '../../helpers/useFetch';
 
 export const LinkInput = () => {
+
+  useFetch();
 
   const handleInputValue = ({target}:ChangeEvent<HTMLInputElement>) => {
     console.log(target.value);
