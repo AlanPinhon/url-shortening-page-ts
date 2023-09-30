@@ -10,10 +10,14 @@ export const LinkInput = () => {
     setInputValue(newURL);
   }
 
-  const onSubmit = (e:FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e:FormEvent<HTMLFormElement>) => {
+   try {
     e.preventDefault();
-    getShortedLink(inputValue);
+    await getShortedLink(inputValue);
     setInputValue('');
+   } catch (error) {
+    console.log(error);   
+   }
   }
 
   return (
