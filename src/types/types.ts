@@ -1,6 +1,6 @@
 export type LinkResponseBody = {
   result: ShortedLinkResult;
-  error_code?: number;
+  error?:string
 }
 
 export type ShortedLinkResult = {
