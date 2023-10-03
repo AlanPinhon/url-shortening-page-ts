@@ -6,7 +6,7 @@ export const getShortedLink = async (url:string):Promise<ShortedLinkResult> => {
   const response = await fetch(urlFetch);
   const data:LinkResponseBody = await response.json();
 
-  if(!response.ok) throw data.error;
+  if(!response.ok) throw data.error_code;
 
   return {...data.result}
 }
