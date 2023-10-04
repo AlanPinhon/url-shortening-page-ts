@@ -1,7 +1,12 @@
 import { FormEvent,ChangeEvent, useState } from 'react';
 import { getShortedLink } from '../../helpers/getShortedLink';
+import { ShortedLinkResult } from '../../types/types';
 
-export const LinkInput = () => {
+type FormProps = {
+  setShortenedLink: (arg:ShortedLinkResult) => void;
+};
+
+export const LinkInput = ({setShortenedLink}:FormProps) => {
   const [inputValue, setInputValue] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -29,7 +34,8 @@ export const LinkInput = () => {
     const linkIsValid = validateLink(inputValue);
     
     if(linkIsValid){
-      await getShortedLink(inputValue);
+      const shortenedLink = await getShortedLink(inputValue);
+      setShortenedLink(shortenedLink);
       setInputValue('');
       setErrorMsg('');
     }
