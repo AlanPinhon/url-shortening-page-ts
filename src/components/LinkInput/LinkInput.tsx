@@ -34,7 +34,7 @@ export const LinkInput = () => {
       setErrorMsg('');
     }
    } catch (error) {
-      (error) && setErrorMsg('Error processing link'); 
+      setErrorMsg('Error processing link'); 
    }
   }
 
