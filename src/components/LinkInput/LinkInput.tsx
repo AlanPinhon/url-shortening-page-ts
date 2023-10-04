@@ -31,11 +31,10 @@ export const LinkInput = () => {
     if(linkIsValid){
       await getShortedLink(inputValue);
       setInputValue('');
+      setErrorMsg('');
     }
    } catch (error) {
-      (error)
-        ? setErrorMsg('Error processing link')
-        : setErrorMsg(''); 
+      (error) && setErrorMsg('Error processing link'); 
    }
   }
 
