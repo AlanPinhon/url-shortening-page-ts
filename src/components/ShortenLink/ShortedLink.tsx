@@ -10,7 +10,7 @@ export const ShortedLink = () => {
   return (
     <>
       <LinkInput setShortenedLink= {setShortenedLink}/>
-      <ShortenedLinkItem shortenedLink={shortenedLink}/>
+      {shortenedLink && <ShortenedLinkItem shortenedLink={shortenedLink}/>}
     </>
   )
 }
