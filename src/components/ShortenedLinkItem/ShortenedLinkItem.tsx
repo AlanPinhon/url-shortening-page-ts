@@ -1,10 +1,8 @@
+import { useState } from 'react';
 import { ShortedLinkResult } from '../../types/types';
 import { copyToClipboard } from '../../helpers/copyToClipboard';
-import { useState } from 'react';
 
-type ResultProps = {
-  shortenedLink: ShortedLinkResult | null;
-}
+type ResultProps = { shortenedLink: ShortedLinkResult }
 
 export const ShortenedLinkItem = ({shortenedLink}:ResultProps) => {
 
@@ -14,11 +12,18 @@ export const ShortenedLinkItem = ({shortenedLink}:ResultProps) => {
   const shortLink = shortenedLink?.full_short_link;  
 
   const handleCopyText = () => {
-    copyToClipboard(shortLink!);
-    setCopyText('Copied!');
-    setTimeout(() => {
-      setCopyText('Copy');
-    }, 2000);
+    try {
+      copyToClipboard(shortLink!);
+      setCopyText('Copied!');
+      setTimeout(() => {
+        setCopyText('Copy');
+      }, 2000);
+    } catch (error) {
+      setCopyText('Copy error');
+      setTimeout(() => {
+        setCopyText('Copy');
+      }, 2000);
+    }
   }
 
   return (

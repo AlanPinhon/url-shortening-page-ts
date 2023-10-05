@@ -5,7 +5,7 @@ import { ShortedLinkResult } from '../../types/types';
 
 export const ShortedLink = () => {
 
-  const [shortenedLink, setShortenedLink] = useState<ShortedLinkResult | null>(null);
+  const [shortenedLink, setShortenedLink] = useState<ShortedLinkResult>();
 
   return (
     <>
