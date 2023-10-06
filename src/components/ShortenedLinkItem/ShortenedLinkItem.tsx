@@ -8,12 +8,12 @@ export const ShortenedLinkItem = ({shortenedLink}:ResultProps) => {
 
   const [copyText, setCopyText] = useState('Copy');
 
-  const originalLink = shortenedLink?.original_link;
-  const shortLink = shortenedLink?.full_short_link;  
+  const originalLink = shortenedLink.original_link;
+  const shortLink = shortenedLink.full_short_link;  
 
-  const handleCopyText = () => {
+  const handleCopyText = async ():Promise<void> => {
     try {
-      copyToClipboard(shortLink!);
+      await copyToClipboard(shortLink!);
       setCopyText('Copied!');
       setTimeout(() => {
         setCopyText('Copy');
