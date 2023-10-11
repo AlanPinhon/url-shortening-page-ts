@@ -1,7 +1,8 @@
-import { LinkInput } from "../LinkInput/LinkInput"
-
+import { ShortedLink } from '../ShortenLink/ShortedLink';
 export const UrlShorteningPage = () => {
   return (
-    <LinkInput/>
+    <>
+      <ShortedLink/>
+    </>
   )
 }
