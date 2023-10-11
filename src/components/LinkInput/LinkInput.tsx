@@ -1,9 +1,9 @@
 import { FormEvent,ChangeEvent, useState, useEffect } from 'react';
 import { getShortedLink } from '../../helpers/getShortedLink';
-import { ShortedLinkResult } from '../../types/types';
+import { LinkResponseData } from '../../types/types';
 
 type FormProps = {
-  setShortenedLink: (arg:ShortedLinkResult) => void;
+  setShortenedLink: (value:LinkResponseData) => void;
 };
 
 export const LinkInput = ({setShortenedLink}:FormProps) => {
@@ -11,7 +11,7 @@ export const LinkInput = ({setShortenedLink}:FormProps) => {
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    const storedLinks:ShortedLinkResult = JSON.parse(localStorage.getItem('links')!);
+    const storedLinks:LinkResponseData = JSON.parse(localStorage.getItem('links')!);
     if(storedLinks) {
       setShortenedLink(storedLinks);
     }
@@ -41,7 +41,8 @@ export const LinkInput = ({setShortenedLink}:FormProps) => {
     const linkIsValid = validateLink(inputValue);
     
     if(linkIsValid){
-      const shortenedLink = await getShortedLink(inputValue);
+      await getShortedLink(inputValue);
+      const shortenedLink:LinkResponseData = await getShortedLink(inputValue);
       localStorage.setItem('links', JSON.stringify(shortenedLink));
       setShortenedLink(shortenedLink);
       setInputValue('');
