@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { LinkInput } from '../LinkInput/LinkInput';
 import { ShortenedLinkItem } from '../ShortenedLinkItem/ShortenedLinkItem';
-import { ShortedLinkResult } from '../../types/types';
+import { LinkResponseData } from '../../types/types';
 
 export const ShortedLink = () => {
 
-  const [shortenedLink, setShortenedLink] = useState<ShortedLinkResult>();
+  const [shortenedLink, setShortenedLink] = useState<LinkResponseData>();
 
   return (
     <>
