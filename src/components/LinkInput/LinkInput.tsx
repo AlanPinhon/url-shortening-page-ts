@@ -1,50 +1,30 @@
 import { FormEvent,ChangeEvent, useState, useEffect } from 'react';
 import { getShortedLink } from '../../helpers/getShortedLink';
-import { LinkResponseData } from '../../types/types';
+import { LinkInputProps, LinkResponseData } from '../../types/types';
+import { validateLink } from '../../helpers/validateLink';
 
-type FormProps = {
-  setShortenedLink: (value:LinkResponseData) => void;
-};
-
-export const LinkInput = ({setShortenedLink}:FormProps) => {
+export const LinkInput = ({ shortenedLink, setShortenedLink}:LinkInputProps) => {
   const [inputValue, setInputValue] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    const storedLinks:LinkResponseData = JSON.parse(localStorage.getItem('links')!);
+    const storedLinks:LinkResponseData[] = JSON.parse(localStorage.getItem('links')!) || [];
     if(storedLinks) {
       setShortenedLink(storedLinks);
     }
-  }, [setShortenedLink]);
+  }, [setShortenedLink])
 
-  const handleInputValue = ({ target }:ChangeEvent<HTMLInputElement>) => {
-    const newURL = target.value;
-    setInputValue(newURL);
-  }
-
-  const validateLink = (linkValue:string) => {
-    const isLinkValue = /^(https?):\/\/[^\s/$.?#].[^\s]*$/i.test(linkValue);
-
-    if(linkValue === '') {
-      setErrorMsg('Please add a link');
-    } else if (!isLinkValue) {
-      setErrorMsg('Invalid URL submitted');
-    } else {
-      setErrorMsg('');
-    }
-    return isLinkValue;
-  }
+  const handleInputValue = ({ target }:ChangeEvent<HTMLInputElement>) => setInputValue(target.value);
 
   const onSubmit = async (e:FormEvent<HTMLFormElement>) => {
    try {
     e.preventDefault();
-    const linkIsValid = validateLink(inputValue);
+    const linkIsValid = validateLink(inputValue, setErrorMsg);
     
     if(linkIsValid){
-      await getShortedLink(inputValue);
-      const shortenedLink:LinkResponseData = await getShortedLink(inputValue);
-      localStorage.setItem('links', JSON.stringify(shortenedLink));
-      setShortenedLink(shortenedLink);
+      const shortLink:LinkResponseData = await getShortedLink(inputValue);
+      localStorage.setItem('links', JSON.stringify([ shortLink, ...shortenedLink]));
+      setShortenedLink([ shortLink, ...shortenedLink]);
       setInputValue('');
       setErrorMsg('');
     }
