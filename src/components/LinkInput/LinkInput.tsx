@@ -1,36 +1,19 @@
-import { FormEvent,ChangeEvent, useState, useEffect } from 'react';
-import { getShortedLink } from '../../helpers/getShortedLink';
-import { LinkInputProps, LinkResponseData } from '../../types/types';
-import { validateLink } from '../../helpers/validateLink';
+import { FormEvent,ChangeEvent, useState } from 'react';
 
-export const LinkInput = ({ shortenedLink, setShortenedLink}:LinkInputProps) => {
+type LinkInputProps = {
+  errorMsg: string;
+  onAddShortLink: (url: string) => Promise<void>;
+};
+
+export const LinkInput = ({errorMsg, onAddShortLink}:LinkInputProps) => {
+  
   const [inputValue, setInputValue] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
-
-  useEffect(() => {
-    const storedLinks:LinkResponseData[] = JSON.parse(localStorage.getItem('links')!) || [];
-    if(storedLinks) {
-      setShortenedLink(storedLinks);
-    }
-  }, [setShortenedLink])
 
   const handleInputValue = ({ target }:ChangeEvent<HTMLInputElement>) => setInputValue(target.value);
 
-  const onSubmit = async (e:FormEvent<HTMLFormElement>) => {
-   try {
-    e.preventDefault();
-    const linkIsValid = validateLink(inputValue, setErrorMsg);
-    
-    if(linkIsValid){
-      const shortLink:LinkResponseData = await getShortedLink(inputValue);
-      localStorage.setItem('links', JSON.stringify([ shortLink, ...shortenedLink]));
-      setShortenedLink([ shortLink, ...shortenedLink]);
-      setInputValue('');
-      setErrorMsg('');
-    }
-   } catch (error) {
-      setErrorMsg('Error processing link'); 
-   }
+  const onSubmit = (e:FormEvent<HTMLFormElement>) => {
+   e.preventDefault();
+   onAddShortLink(inputValue);
   }
 
   return (

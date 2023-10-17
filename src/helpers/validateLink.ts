@@ -1,12 +1,12 @@
-export const validateLink = (linkValue:string, setErrorMsg:(value:string) => void ) => {
-  const isLinkValue = /^(https?):\/\/[^\s/$.?#].[^\s]*$/i.test(linkValue);
+export const validateLink = ( linkValue:string ) => {
+  const isValidURLFormat = /^(https?):\/\/[^\s/$.?#].[^\s]*$/i.test(linkValue);
+  let linkErrorMsg = '';
 
   if(linkValue === '') {
-    setErrorMsg('Please add a link');
-  } else if (!isLinkValue) {
-    setErrorMsg('Invalid URL submitted');
-  } else {
-    setErrorMsg('');
+    linkErrorMsg = 'Please add a link'
+  } else if (!isValidURLFormat) {
+    linkErrorMsg = 'Invalid URL submitted'
   }
-  return isLinkValue;
+
+  return {linkErrorMsg, isValidURLFormat};
 }
