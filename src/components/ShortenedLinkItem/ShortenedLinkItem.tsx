@@ -1,19 +1,14 @@
 import { useState } from 'react';
-import { LinkResponseData } from '../../types/types';
 import { copyToClipboard } from '../../helpers/copyToClipboard';
+import { LinkResponseData } from '../../types/types';
 
-type ResultProps = { shortenedLink: LinkResponseData }
+export const ShortenedLinkItem = ({link, long_url}:LinkResponseData) => {
 
-export const ShortenedLinkItem = ({shortenedLink}:ResultProps) => {
+  const [copyText, setCopyText] = useState('Copy');  
 
-  const [copyText, setCopyText] = useState('Copy');
-
-  const originalLink = shortenedLink.long_url;
-  const shortLink = shortenedLink.link;  
-
-  const handleCopyText = async ():Promise<void> => {
+  const handleCopyText = async () => {
     try {
-      await copyToClipboard(shortLink!);
+      await copyToClipboard(link);
       setCopyText('Copied!');
       setTimeout(() => {
         setCopyText('Copy');
@@ -28,8 +23,8 @@ export const ShortenedLinkItem = ({shortenedLink}:ResultProps) => {
 
   return (
     <div className="shortened-link-container">
-      <p>{originalLink}</p>
-      <p>{shortLink}</p>
+      <p>{long_url}</p>
+      <p>{link}</p>
       <button onClick={handleCopyText}>{copyText}</button>
     </div>
   )
