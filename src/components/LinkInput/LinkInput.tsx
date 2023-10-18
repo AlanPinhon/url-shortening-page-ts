@@ -14,6 +14,7 @@ export const LinkInput = ({errorMsg, onAddShortLink}:LinkInputProps) => {
   const onSubmit = (e:FormEvent<HTMLFormElement>) => {
    e.preventDefault();
    onAddShortLink(inputValue);
+   setInputValue('');
   }
 
   return (
