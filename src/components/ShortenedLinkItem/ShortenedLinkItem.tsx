@@ -28,7 +28,7 @@ export const ShortenedLinkItem = ({id ,link, long_url, onRemoveLink}:ShortLinkIt
   }
 
   return (
-    <div id={id} className="shortened-link-container">
+    <div className="shortened-link-container">
       <p>{long_url}</p>
       <p>{link}</p>
       <button onClick={handleCopyText}>{copyText}</button>
