@@ -28,14 +28,20 @@ export const ShortedLink = () => {
     }
   }
 
+  const handleRemoveLink = (id:string) => {
+    const updatedShortLinks = shortenedLink.filter(link => link.id !== id);
+    setShortenedLink(updatedShortLinks);
+    localStorage.setItem('links', JSON.stringify(updatedShortLinks))
+  }
+
   return (
     <>
       <LinkInput onAddShortLink={handleAddShortLink} errorMsg={errorMsg} />
-      {shortenedLink && shortenedLink.map(({id, link, long_url}) => (
+      {shortenedLink && shortenedLink.map((shortLink) => (
         <ShortenedLinkItem
-          key={id}
-          link={link}
-          long_url={long_url}
+          key={shortLink.id}
+          shortLink = {shortLink}
+          onRemoveLink={handleRemoveLink}
         />
       ))}
     </>

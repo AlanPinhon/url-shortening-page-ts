@@ -2,9 +2,15 @@ import { useState } from 'react';
 import { copyToClipboard } from '../../helpers/copyToClipboard';
 import { LinkResponseData } from '../../types/types';
 
-export const ShortenedLinkItem = ({link, long_url}:LinkResponseData) => {
+type ShortLinkItemProps = {
+  shortLink: LinkResponseData;
+  onRemoveLink: (id: string) => void;
+}
+
+export const ShortenedLinkItem = ({shortLink, onRemoveLink}:ShortLinkItemProps) => {
 
   const [copyText, setCopyText] = useState('Copy');  
+  const {id, link, long_url} = shortLink;
 
   const handleCopyText = async () => {
     try {
@@ -26,6 +32,7 @@ export const ShortenedLinkItem = ({link, long_url}:LinkResponseData) => {
       <p>{long_url}</p>
       <p>{link}</p>
       <button onClick={handleCopyText}>{copyText}</button>
+      <button onClick={() => onRemoveLink(id)}>X</button>
     </div>
   )
 }
