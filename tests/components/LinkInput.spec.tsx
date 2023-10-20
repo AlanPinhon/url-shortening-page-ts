@@ -7,7 +7,7 @@ describe('tests in <LinkInput/>', () => {
 
   test('should render initial input', () => {
     const onAddShortLinkMock = vi.fn();
-    render(<LinkInput errorMsg='' onAddShortLink={onAddShortLinkMock} />);
+    render(<LinkInput onAddShortLink={onAddShortLinkMock} />);
     
     const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
 
@@ -17,7 +17,7 @@ describe('tests in <LinkInput/>', () => {
 
   test('should show an error if the input value is empty', () => {
     const onAddShortLinkMock = vi.fn();
-    render(<LinkInput errorMsg='Please add a link' onAddShortLink={onAddShortLinkMock} />);
+    render(<LinkInput onAddShortLink={onAddShortLinkMock} />);
     
     const shortenBtn = screen.getByRole('button');
     fireEvent.click(shortenBtn);
@@ -29,7 +29,7 @@ describe('tests in <LinkInput/>', () => {
     const onAddShortLinkMock = vi.fn();
     const invalidLink = 'www.youtube.com';
 
-    render(<LinkInput errorMsg='Invalid URL submitted' onAddShortLink={onAddShortLinkMock} />);
+    render(<LinkInput onAddShortLink={onAddShortLinkMock} />);
     
     const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
     const shortenBtn = screen.getByRole('button');
@@ -44,7 +44,7 @@ describe('tests in <LinkInput/>', () => {
     const onAddShortLinkMock = vi.fn();
     const validLink = 'https://www.youtube.com';
 
-    render(<LinkInput errorMsg='' onAddShortLink={onAddShortLinkMock} />);
+    render(<LinkInput onAddShortLink={onAddShortLinkMock} />);
     
     const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
     const shortenBtn = screen.getByRole('button');
