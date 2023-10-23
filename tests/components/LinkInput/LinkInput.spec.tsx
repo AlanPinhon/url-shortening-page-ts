@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import { LinkInput } from '../../src/components/LinkInput/LinkInput';
+import { LinkInput } from '../../../src/components/LinkInput/LinkInput';
 
 describe('tests in <LinkInput/>', () => {
 
