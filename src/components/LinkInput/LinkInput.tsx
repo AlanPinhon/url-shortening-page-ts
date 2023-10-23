@@ -1,20 +1,28 @@
 import { FormEvent,ChangeEvent, useState } from 'react';
+import { validateLink } from '../../helpers/validateLink';
 
 type LinkInputProps = {
-  errorMsg: string;
   onAddShortLink: (url: string) => Promise<void>;
 };
 
-export const LinkInput = ({errorMsg, onAddShortLink}:LinkInputProps) => {
+export const LinkInput = ({onAddShortLink}:LinkInputProps) => {
   
   const [inputValue, setInputValue] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleInputValue = ({ target }:ChangeEvent<HTMLInputElement>) => setInputValue(target.value);
 
   const onSubmit = (e:FormEvent<HTMLFormElement>) => {
    e.preventDefault();
-   onAddShortLink(inputValue);
-   setInputValue('');
+    const {isValidURLFormat, linkErrorMsg} = validateLink(inputValue);
+
+    if(isValidURLFormat) {
+      onAddShortLink(inputValue);
+      setInputValue('');
+      setErrorMsg('');
+    } else {
+     setErrorMsg(linkErrorMsg);
+    }
   }
 
   return (
