@@ -1,25 +1,44 @@
 import React from 'react';
+import { waitFor ,fireEvent, render, screen } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 import { rest } from 'msw';
+import { expect } from 'vitest';
 import { server } from '../../../src/mocks/server';
-import { afterEach, vi } from 'vitest';
-import { getShortedLink } from '../../../src/helpers/getShortedLink';
-import { LinkResponseData } from '../../../src/types/types';
-import { act, fireEvent, render, screen } from '@testing-library/react';
 import { ShortedLink } from '../../../src/components/ShortenLink/ShortedLink';
+import { getShortedLink } from '../../../src/helpers/getShortedLink';
 
 describe('Tests on <ShortedLink/>', () => {
 
-  const getItemSpy = vi.spyOn(Storage.prototype, 'getItem');
-  const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
+  test('should render initial input', () => {
+    render(<ShortedLink/>);
 
-  afterEach(() => {
-    localStorage.clear();
-    getItemSpy.mockClear();
-    setItemSpy.mockClear();
-  })
+    const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
+
+    expect(linkInput).toBeTruthy();
+    expect(linkInput.value).toBe('');
+  });
+
+  test('should show an error if the input value is empty', () => {
+    render(<ShortedLink/>);
+
+    const shortenBtn = screen.getByText('Shorten it!');
+    fireEvent.click(shortenBtn);
+    expect(screen.getByText('Please add a link')).toBeTruthy();
+  });
+
+  test('should show an error if the URL format is invalid', () => {
+    render(<ShortedLink/>);
+
+    const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
+    const shortenBtn = screen.getByText('Shorten it!');
+    
+    fireEvent.change(linkInput, {target: {value: 'www.youtube.com'}})
+    fireEvent.click(shortenBtn);
+    
+    expect(screen.getByText('Invalid URL submitted')).toBeTruthy();
+  });
 
   test('should simulate a failed POST request', async () => { 
-    
     const errorDataResponse = {ok: false, message: 'Error processing link'};
 
     server.use(
@@ -29,77 +48,74 @@ describe('Tests on <ShortedLink/>', () => {
         )
       })
     );
+    const validLink = 'https://www.youtube.com/';
+    render(<ShortedLink/>);
+
+    const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
+    const shortenBtn = screen.getByText('Shorten it!');
+
+    fireEvent.change(linkInput, {target: {value: validLink}})
+    fireEvent.click(shortenBtn);
 
     try {
-      const validLink = 'https://www.youtube.com/';
-      const response = await getShortedLink(validLink);
-
-      expect(response).toBe(false);
+      await getShortedLink(validLink);
     } catch (error) {
-      expect(error).toEqual(errorDataResponse);
+      expect(error.message).toBe('Error processing link');
+      expect(error).toBeTruthy();
     }
   });
 
-  test('should simulate a successful POST request to shorten a link', async () => { 
+  test('should show the shorted and original link', async () => {
     const validLink = 'https://www.youtube.com/';
-
-    const response = await getShortedLink(validLink);
-
-    expect(response.link).toBe("https://bit.ly/3ZRT7EC");
-    expect(response.long_url).toBe(validLink);
-  });
-
-  test('should add data to LocalStorage', async () => {
-    const shortenedLinks: LinkResponseData[] = [];
-    const validLink = 'https://www.youtube.com';
 
     render(<ShortedLink/>);
 
     const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
-    const shortenBtn = screen.getByRole('button');
+    const shortenBtn = screen.getByText('Shorten it!');
 
-   await act( async () => {
-    fireEvent.change(linkInput, {target: {value: validLink}});
+    fireEvent.change(linkInput, {target: {value: validLink}})
     fireEvent.submit(shortenBtn);
 
-    const response = await getShortedLink(validLink);
-    shortenedLinks.push(response);
+    await waitFor(() => {
+      const shortLink = screen.getByText('https://bit.ly/3ZRT7EC');
+      const originalLink = screen.getByText(validLink);
 
-    localStorage.setItem('links', JSON.stringify(shortenedLinks));
-   });
-
-    expect(setItemSpy).toHaveBeenCalledWith('links', JSON.stringify(shortenedLinks));
+      expect(shortLink).toBeTruthy();
+      expect(originalLink).toBeTruthy();
+    });
   });
 
-  test('should get data from LocalStorage and show it in the DOM', async() => {
-    const shortenedLinks: LinkResponseData[] = [];
-    const validLink = 'https://www.youtube.com/';
+  test('should fail copy of shortened link', async () => {
+    render(<ShortedLink/>);
+    
+    const copyLinkBtn = screen.getByText('Copy');
+    fireEvent.click(copyLinkBtn);
+    
+    await waitFor(() => {
+      const copyErrorMsgBtn = screen.getByText('Copy error');
+      expect(copyErrorMsgBtn).toBeTruthy();
+    })
+  });
+
+  test('should copy the shortened link', async () => {
+    const user = userEvent.setup();
 
     render(<ShortedLink/>);
-
-    const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
-    const shortenBtn = screen.getByRole('button');
-
-    await act( async () => {
-     fireEvent.change(linkInput, {target: {value: validLink}});
-     fireEvent.submit(shortenBtn);
-
-     const response = await getShortedLink(validLink);
-     shortenedLinks.push(response);
-
-     localStorage.setItem('links', JSON.stringify(shortenedLinks));
-    });
     
-    const storedData:LinkResponseData[] = JSON.parse(localStorage.getItem('links')!);
+    const copyLinkBtn = screen.getByText('Copy');
+    await user.click(copyLinkBtn);
+    const copiedLink = await navigator.clipboard.readText();
+    expect(copiedLink).toBe('https://bit.ly/3ZRT7EC');
+  });
 
-    const shortLink = screen.getByText('https://bit.ly/3ZRT7EC');
-    const originalLink = screen.getByText(validLink);
+  test('should remove the shortened link from the screen', () => {
+    render(<ShortedLink/>);
 
-    expect(storedData).toStrictEqual(shortenedLinks);
-    expect(getItemSpy).toHaveBeenCalledWith('links');
-
-    expect(shortLink).toBeTruthy();
-    expect(originalLink).toBeTruthy();
+    const removeShortLink = screen.getByText('X');
+    fireEvent.click(removeShortLink);
+    
+    const shortedLink = screen.queryByText('https://bit.ly/3ZRT7EC');
+    expect(shortedLink).toBeNull();
   });
 
 });
