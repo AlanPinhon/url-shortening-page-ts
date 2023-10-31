@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
 import { LinkInput } from '../../../src/components/LinkInput/LinkInput';
 
@@ -7,7 +7,14 @@ describe('tests in <LinkInput/>', () => {
 
   test('should render initial input', () => {
     const onAddShortLinkMock = vi.fn();
-    render(<LinkInput onAddShortLink={onAddShortLinkMock} />);
+    const setErrorMsgMock = vi.fn();
+    render(
+      <LinkInput
+        onAddShortLink={onAddShortLinkMock}
+        setErrorMsg={setErrorMsgMock}
+        errorMsg=''
+      />
+    );
     
     const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
 
@@ -17,19 +24,35 @@ describe('tests in <LinkInput/>', () => {
 
   test('should show an error if the input value is empty', () => {
     const onAddShortLinkMock = vi.fn();
-    render(<LinkInput onAddShortLink={onAddShortLinkMock} />);
+    const setErrorMsgMock = vi.fn();
+
+    render(
+      <LinkInput
+        onAddShortLink={onAddShortLinkMock}
+        setErrorMsg={setErrorMsgMock}
+        errorMsg=''
+      />
+    );
     
-    const shortenBtn = screen.getByRole('button');
+    const shortenBtn = screen.getByText('Shorten it!');
     fireEvent.click(shortenBtn);
 
-    expect(screen.getByText('Please add a link')).toBeTruthy();
+    expect(setErrorMsgMock).toBeCalledWith('Please add a link');
+    screen.debug();   
   });
 
   test('should show an error if the URL format is invalid', () => {
-    const onAddShortLinkMock = vi.fn();
     const invalidLink = 'www.youtube.com';
+    const onAddShortLinkMock = vi.fn();
+    const setErrorMsgMock = vi.fn();
 
-    render(<LinkInput onAddShortLink={onAddShortLinkMock} />);
+    render(
+      <LinkInput
+        onAddShortLink={onAddShortLinkMock}
+        setErrorMsg={setErrorMsgMock}
+        errorMsg=''
+      />
+    );
     
     const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
     const shortenBtn = screen.getByRole('button');
@@ -37,14 +60,21 @@ describe('tests in <LinkInput/>', () => {
     fireEvent.change(linkInput, {target: {value: invalidLink}})
     fireEvent.click(shortenBtn);
 
-    expect(screen.getByText('Invalid URL submitted')).toBeTruthy();
+    expect(setErrorMsgMock).toBeCalledWith('Invalid URL submitted');
   });
 
   test('should call the onAddShortLink function with a valid link', () => {
-    const onAddShortLinkMock = vi.fn();
     const validLink = 'https://www.youtube.com';
+    const onAddShortLinkMock = vi.fn();
+    const setErrorMsgMock = vi.fn();
 
-    render(<LinkInput onAddShortLink={onAddShortLinkMock} />);
+    render(
+      <LinkInput
+        onAddShortLink={onAddShortLinkMock}
+        setErrorMsg={setErrorMsgMock}
+        errorMsg=''
+      />
+    );
     
     const linkInput = screen.getByPlaceholderText('Shorten a link here...') as HTMLInputElement;
     const shortenBtn = screen.getByRole('button');
