@@ -22,7 +22,23 @@ describe('tests in <LinkInput/>', () => {
     expect(linkInput.value).toBe('');
   });
 
-  test('should show an error if the input value is empty', () => {
+  test('should show an error message', () => {
+    const onAddShortLinkMock = vi.fn();
+    const setErrorMsgMock = vi.fn();
+
+    render(
+      <LinkInput
+        onAddShortLink={onAddShortLinkMock}
+        setErrorMsg={setErrorMsgMock}
+        errorMsg='Please add a link'
+      />
+    );
+    
+    const errorMsg = screen.getByText('Please add a link');
+    expect(errorMsg).toBeTruthy(); 
+  });
+
+  test('should call the onAddShortLink function with the text: "Please add a link"', () => {
     const onAddShortLinkMock = vi.fn();
     const setErrorMsgMock = vi.fn();
 
@@ -37,11 +53,10 @@ describe('tests in <LinkInput/>', () => {
     const shortenBtn = screen.getByText('Shorten it!');
     fireEvent.click(shortenBtn);
 
-    expect(setErrorMsgMock).toBeCalledWith('Please add a link');
-    screen.debug();   
+    expect(setErrorMsgMock).toBeCalledWith('Please add a link'); 
   });
 
-  test('should show an error if the URL format is invalid', () => {
+  test('should call the onAddShortLink function with the text: "Invalid URL submitted"', () => {
     const invalidLink = 'www.youtube.com';
     const onAddShortLinkMock = vi.fn();
     const setErrorMsgMock = vi.fn();
