@@ -5,7 +5,7 @@ import { LinkResponseData } from '../../types/types';
 import { getShortedLink } from '../../helpers/getShortedLink';
 
 export const ShortedLink = () => {
-  
+  const [errorMsg, setErrorMsg] = useState('');
   const [shortenedLink, setShortenedLink] = useState<LinkResponseData[]>(
     JSON.parse(localStorage.getItem('links')!) || []
   );
@@ -14,9 +14,9 @@ export const ShortedLink = () => {
     try {
       const shortLink:LinkResponseData = await getShortedLink(link);
       setShortenedLink([shortLink, ...shortenedLink]);
-      localStorage.setItem('links', JSON.stringify([shortLink, ...shortenedLink]))
+      localStorage.setItem('links', JSON.stringify([shortLink, ...shortenedLink]));
     } catch (error) {
-      console.error('Error processing link');
+      setErrorMsg('Error processing link');
     }
   }
 
@@ -28,7 +28,7 @@ export const ShortedLink = () => {
 
   return (
     <>
-      <LinkInput onAddShortLink={handleAddShortLink} />
+      <LinkInput errorMsg={errorMsg} setErrorMsg={setErrorMsg} onAddShortLink={handleAddShortLink} />
       {shortenedLink && shortenedLink.map((shortLink) => (
         <ShortenedLinkItem
           key={shortLink.id}
