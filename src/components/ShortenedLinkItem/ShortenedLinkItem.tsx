@@ -29,10 +29,10 @@ export const ShortenedLinkItem = ({shortLink, onRemoveLink}:ShortLinkItemProps) 
 
   return (
     <div className="shortened-link-container">
-      <p>{long_url}</p>
-      <p>{link}</p>
-      <button onClick={handleCopyText}>{copyText}</button>
-      <button onClick={() => onRemoveLink(id)}>X</button>
+      <p className='original-link'>{long_url}</p>
+      <p className='short-link'>{link}</p>
+      <button className='copy-link-btn' onClick={handleCopyText}>{copyText}</button>
+      <button className='remove-link-btn' onClick={() => onRemoveLink(id)}>X</button>
     </div>
   )
 }
