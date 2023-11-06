@@ -4,6 +4,7 @@ import { ShortedLink } from '../ShortenLink/ShortedLink';
 import { InfoSection } from '../InfoSection/InfoSection';
 import { Footer } from '../Footer/Footer';
 import { SloganSection } from '../SloganSection/SloganSection';
+import './UrlShorteningPageStyles.css';
 
 export const UrlShorteningPage = () => {
   return (

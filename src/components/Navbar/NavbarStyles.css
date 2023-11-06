@@ -1,0 +1,28 @@
+.navbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  &.left{
+    width: 30rem;
+
+    & ul li .nav-link {
+      margin-left: 2.25rem;
+    }
+  }
+
+  &.right{
+    width: 12.5rem;
+
+    & .btn-link.nav{
+      border-radius: 1.25rem;
+      padding: .5rem 1.5rem;
+    }
+  }
+}
