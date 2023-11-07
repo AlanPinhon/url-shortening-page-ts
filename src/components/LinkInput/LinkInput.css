@@ -1,0 +1,39 @@
+.link-input{
+  border-radius: .75rem;
+  padding: 3rem 4rem;
+  background-color: var(--dark-violet);
+  background-image: url('/public/assets/images/bg-shorten-desktop.svg');
+
+  & .shorten-link-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & input{
+      width: 80%;
+      height: 4rem;
+      padding-left: 2rem;
+      font-size: 1.2rem;
+      border: 1px solid var(--gray);
+      border-radius: .5rem;
+      outline: none;
+
+      &::placeholder{
+        font-weight: 500;
+        color: var(--grayish-violet);
+      }
+    }
+
+    & .shorten-btn{
+      width: 18%;
+      height: 4rem;
+      background-color: var(--cyan);
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: none;
+      border-radius: .5rem;
+    }
+
+  }
+}

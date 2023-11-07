@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  & .info-header{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 36.2rem;
+
+    & .slogan{
+      font-size: 5rem;
+      line-height: 5.5rem;
+      letter-spacing: -.18rem;
+      color: var(--very-dark-blue);
+    }
+    
+    & .text-header{
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--grayish-violet);
+    }
+  
+    & .btn-header{
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 2rem;
+      margin: 2rem 0;
+      padding: .9rem 2.25rem;
+    }
+  }
+
+  & .image-header{
+    width: 40%;
+  }
+}

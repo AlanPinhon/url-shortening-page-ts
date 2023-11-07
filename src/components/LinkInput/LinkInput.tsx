@@ -1,5 +1,6 @@
 import { FormEvent,ChangeEvent, useState } from 'react';
 import { validateLink } from '../../helpers/validateLink';
+import './LinkInput.css';
 
 type LinkInputProps = {
   errorMsg: string;
@@ -27,7 +28,7 @@ export const LinkInput = ({errorMsg, setErrorMsg, onAddShortLink}:LinkInputProps
   }
 
   return (
-    <div className="link-input-container">
+    <div className="link-input container">
       <form id='shorten-link-form' className='shorten-link-form' onSubmit={onSubmit}>
         <input onChange={handleInputValue} type="text" value={inputValue} placeholder="Shorten a link here..."/>
         <button type='submit' className="shorten-btn">Shorten it!</button>

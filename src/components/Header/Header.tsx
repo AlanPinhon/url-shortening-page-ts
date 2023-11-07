@@ -1,13 +1,14 @@
 import ImageHeader from '/assets/images/illustration-working.svg';
+import './Header.css';
 
 export const Header = () => (
-  <section id="header" className="header">
+  <section id="header" className="container header">
 
     <div className="info-header">
-      <h1>More than just shorter links</h1>
-      <p>Build your brand's recognition and get detailed insights 
+      <h1 className='slogan'>More than just shorter links</h1>
+      <p className='text-header'>Build your brand's recognition and get detailed insights 
       on how your links are performing.</p>
-      <li><a className='nav-btn-link' href="">Get Started</a></li>
+      <a className='btn-link btn-header' href="#">Get Started</a>
     </div>
 
     <div className="image-header">

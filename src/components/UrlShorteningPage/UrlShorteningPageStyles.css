@@ -1,0 +1,42 @@
+:root{
+  /* Colors */
+  --cyan: rgb(42, 207, 207);
+  --dark-violet: rgb(59, 48, 84);
+  --red: rgb(244, 98, 98);
+  --gray: rgb(191, 191, 191);
+  --grayish-violet: rgb(158, 154, 167);
+  --very-dark-blue: rgb(54, 51, 61);
+  --very-dark-violet: rgb(35, 33, 38);
+  /* Font */
+  --body-copy-size: 18px;
+  --poppins-font: 'Poppins', sans-serif;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--poppins-font);
+}
+
+ul{
+  list-style: none;
+  display: flex;
+}
+
+a{
+  text-decoration: none;
+  color: var(--grayish-violet);
+  font-family: var(--poppins-font);
+  font-weight: 700;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 3rem auto;
+}
+
+.btn-link{
+  background-color: var(--cyan);
+  color: #fff;
+}
