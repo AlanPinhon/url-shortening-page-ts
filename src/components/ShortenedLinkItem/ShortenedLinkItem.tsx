@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { copyToClipboard } from '../../helpers/copyToClipboard';
 import { LinkResponseData } from '../../types/types';
+import './ShortenedLinkItemStyles.css';
 
 type ShortLinkItemProps = {
   shortLink: LinkResponseData;
@@ -28,11 +29,13 @@ export const ShortenedLinkItem = ({shortLink, onRemoveLink}:ShortLinkItemProps) 
   }
 
   return (
-    <div className="shortened-link-container">
+    <div className="shortened-link container">
       <p className='original-link'>{long_url}</p>
-      <p className='short-link'>{link}</p>
-      <button className='copy-link-btn' onClick={handleCopyText}>{copyText}</button>
-      <button className='remove-link-btn' onClick={() => onRemoveLink(id)}>X</button>
+      <div className="short-link-section">
+        <p className='short-link'>{link}</p>
+        <button className={`copy-link-btn ${copyText === 'Copied!' ? 'copied-link-btn' : ''}`} onClick={handleCopyText}>{copyText}</button>
+        <button className='remove-link-btn' onClick={() => onRemoveLink(id)}>X</button>
+      </div>
     </div>
   )
 }

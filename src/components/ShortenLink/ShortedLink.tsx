@@ -3,6 +3,7 @@ import { LinkInput } from '../LinkInput/LinkInput';
 import { ShortenedLinkItem } from '../ShortenedLinkItem/ShortenedLinkItem';
 import { LinkResponseData } from '../../types/types';
 import { getShortedLink } from '../../helpers/getShortedLink';
+import './ShortedLinkStyles.css';
 
 export const ShortedLink = () => {
   const [errorMsg, setErrorMsg] = useState('');
@@ -27,7 +28,7 @@ export const ShortedLink = () => {
   }
 
   return (
-    <>
+    <section className="shorted-link container">
       <LinkInput errorMsg={errorMsg} setErrorMsg={setErrorMsg} onAddShortLink={handleAddShortLink} />
       {shortenedLink && shortenedLink.map((shortLink) => (
         <ShortenedLinkItem
@@ -36,6 +37,6 @@ export const ShortedLink = () => {
           onRemoveLink={handleRemoveLink}
         />
       ))}
-    </>
+    </section>
   )
 }

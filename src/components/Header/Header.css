@@ -3,6 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: 6rem auto 10rem;
 
   & .info-header{
     display: flex;
