@@ -2,7 +2,7 @@ import ShortlyLogo from '/assets/images/logo.svg';
 import './NavbarStyles.css';
 
 export const Navbar = () => (
-  <section className="container">
+  <section className="nav-section container">
     <nav id="navbar" className="navbar">
 
       <div className="nav-container left">

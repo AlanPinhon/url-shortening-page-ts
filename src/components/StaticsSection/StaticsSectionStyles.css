@@ -1,0 +1,38 @@
+.statics-section{
+  position: relative;
+  padding: 5rem 2rem 2.5rem;
+  border-radius: .3rem;
+  background-color: var(--white);
+  width: 31%;
+
+  & .statics-icon-container{
+    position: absolute;
+    top: -2.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-violet);
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+  }
+
+  & .statics-text-title{
+    font-size: 1.3rem;
+    color: var(--very-dark-blue);
+  }
+
+  & .statics-text-paragraph{
+    margin-top: 1rem;
+    font-weight: 500;
+    color: var(--grayish-violet);
+  }
+
+  &.brand {
+    align-self: self-start;
+  }
+
+  &.customizable{
+    align-self: self-end;
+  }
+}

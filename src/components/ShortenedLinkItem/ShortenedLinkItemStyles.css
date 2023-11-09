@@ -1,0 +1,55 @@
+.shortened-link{
+  background-color: var(--white);
+  border-radius: .3rem;
+  margin: 0 auto 1rem;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--body-copy-size);
+
+  & .original-link{
+    font-weight: 600;
+  }
+  
+  & .short-link-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    & .short-link{
+      color: var(--cyan);
+      font-weight: 500;
+    }
+
+    & .copy-link-btn{
+      background-color: var(--cyan);
+      margin-left: 1.5rem;
+      width: 6rem;
+      height: 2.5rem;
+      color: var(--white);
+      font-size: .9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: .3rem;
+      cursor: pointer;
+    }
+
+    & .copied-link-btn{
+      background-color: var(--dark-violet);
+    }
+
+    & .remove-link-btn{
+      background-color: var(--red);
+      margin-left: .5rem;
+      width: 3rem;
+      height: 2.5rem;
+      color: var(--white);
+      font-size: .9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: .3rem;
+      cursor: pointer;
+    }
+  }
+}
