@@ -1,5 +1,6 @@
 :root{
   /* Colors */
+  --white: rgb(255,255,255);
   --cyan: rgb(42, 207, 207);
   --dark-violet: rgb(59, 48, 84);
   --red: rgb(244, 98, 98);
