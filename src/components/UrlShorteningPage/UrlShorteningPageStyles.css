@@ -38,5 +38,5 @@ a{
 
 .btn-link{
   background-color: var(--cyan);
-  color: #fff;
+  color: var(--white);
 }
