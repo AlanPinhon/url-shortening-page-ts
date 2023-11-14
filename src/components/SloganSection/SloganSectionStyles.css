@@ -25,5 +25,10 @@
     border-radius: 2rem;
     margin: 1.5rem 0;
     padding: .9rem 2.25rem;
+    transition: ease-in-out .1s;
+
+    &:hover{
+      background-color: var(--btn-link-hover);
+    }
   }
 }

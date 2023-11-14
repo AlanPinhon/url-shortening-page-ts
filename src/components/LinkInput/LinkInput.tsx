@@ -28,7 +28,7 @@ export const LinkInput = ({errorMsg, setErrorMsg, onAddShortLink}:LinkInputProps
   }
 
   return (
-    <div className="link-input container">
+    <div className="link-input">
       <form id='shorten-link-form' className='shorten-link-form' onSubmit={onSubmit}>
         <input className={errorMsg && 'error-state'} onChange={handleInputValue} type="text" value={inputValue} placeholder="Shorten a link here..."/>
         <button type='submit' className="shorten-btn">Shorten it!</button>

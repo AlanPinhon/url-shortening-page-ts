@@ -8,6 +8,8 @@
   --grayish-violet: rgb(158, 154, 167);
   --very-dark-blue: rgb(54, 51, 61);
   --very-dark-violet: rgb(35, 33, 38);
+  --btn-link-hover: rgb(188, 240, 240);
+  --red-hover: rgb(252, 181, 181);
   /* Font */
   --body-copy-size: 18px;
   --poppins-font: 'Poppins', sans-serif;
@@ -33,6 +35,7 @@ a{
 }
 
 .container{
+  width: 90%;
   max-width: 1200px;
 }
 

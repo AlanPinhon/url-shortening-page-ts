@@ -17,16 +17,34 @@
   
       & ul li .nav-link {
         margin-left: 2.25rem;
+        transition: ease-in-out .1s;
+
+        &:hover{
+          color: var(--very-dark-blue);
+        }
       }
     }
   
     &.right{
       width: 12.5rem;
+
+      & ul li .nav-link {
+        transition: ease-in-out .1s;
+
+        &:hover{
+          color: var(--very-dark-blue);
+        }
+      }
   
       & .btn-link.nav{
         font-weight: 600;
         border-radius: 1.25rem;
         padding: .5rem 1.5rem;
+        transition: ease-in-out .1s;
+
+        &:hover{
+          background-color: var(--btn-link-hover);
+        }
       }
     }
   }

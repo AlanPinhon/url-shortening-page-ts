@@ -40,6 +40,11 @@
         font-weight: 500;
         font-size: .9rem;
         cursor: pointer;
+        transition: ease-in-out .1s;
+
+        &:hover{
+          color: var(--cyan);
+        }
       }
     }
   }
@@ -51,5 +56,13 @@
 
   & .social-link{
     margin-left: 1.5rem;
+
+    & .icon-social-link{
+      transition: ease-in-out .1s;
+
+      &:hover{
+        filter: brightness(60%) sepia(1) hue-rotate(140deg) saturate(5);
+      }
+    }
   }
 }
