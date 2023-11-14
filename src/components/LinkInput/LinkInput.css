@@ -44,6 +44,11 @@
       border: none;
       border-radius: .5rem;
       cursor: pointer;
+      transition: ease-in-out .1s;
+
+      &:hover{
+        background-color: var(--btn-link-hover);
+      }
     }
 
   }

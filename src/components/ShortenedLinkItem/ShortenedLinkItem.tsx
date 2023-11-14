@@ -29,7 +29,7 @@ export const ShortenedLinkItem = ({shortLink, onRemoveLink}:ShortLinkItemProps) 
   }
 
   return (
-    <div className="shortened-link container">
+    <div className="shortened-link">
       <p className='original-link'>{long_url}</p>
       <div className="short-link-section">
         <p className='short-link'>{link}</p>

@@ -1,16 +1,22 @@
 .header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   margin: 6rem auto 10rem;
-
+  overflow: hidden;
+  
+  & .info-header-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    display: flex;
+  }
+  
   & .info-header{
     display: flex;
     flex-direction: column;
     align-items: start;
-    width: 36.2rem;
-
+    max-width: 50%;
+    
     & .slogan{
       font-size: 5rem;
       line-height: 5.5rem;
@@ -23,17 +29,22 @@
       font-weight: 500;
       color: var(--grayish-violet);
     }
-  
+    
     & .btn-header{
       font-size: 1.2rem;
       font-weight: 600;
       border-radius: 2rem;
       margin: 2rem 0;
       padding: .9rem 2.25rem;
+      transition: ease-in-out .1s;
+      
+      &:hover{
+        background-color: var(--btn-link-hover)
+      }
     }
   }
-
-  & .image-header{
-    width: 40%;
+  
+  & .image-container{
+    max-width: 37%;
   }
 }

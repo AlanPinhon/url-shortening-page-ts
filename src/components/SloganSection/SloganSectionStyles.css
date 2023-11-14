@@ -1,0 +1,34 @@
+.background-slogan{
+  width: 100%;
+  height: 250px;
+  background-color: var(--dark-violet);
+  background-image: url('/assets/images/bg-boost-desktop.svg');
+  background-size: cover;
+
+  & .slogan{
+    margin: 0 auto;
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  & .slogan-text{
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  & .slogan-btn{
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 2rem;
+    margin: 1.5rem 0;
+    padding: .9rem 2.25rem;
+    transition: ease-in-out .1s;
+
+    &:hover{
+      background-color: var(--btn-link-hover);
+    }
+  }
+}
