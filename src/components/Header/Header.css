@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    max-width: 50%;
+    width: 55%;
     
     & .slogan{
       font-size: 5rem;

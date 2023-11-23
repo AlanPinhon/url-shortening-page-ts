@@ -32,6 +32,7 @@ a{
   color: var(--grayish-violet);
   font-family: var(--poppins-font);
   font-weight: 700;
+  transition: ease-in-out .1s;
 }
 
 .container{
@@ -42,4 +43,5 @@ a{
 .btn-link{
   background-color: var(--cyan);
   color: var(--white);
+  transition: ease-in-out .1s;
 }

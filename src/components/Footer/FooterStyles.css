@@ -66,3 +66,18 @@
     }
   }
 }
+
+@media screen and (max-width: 990px) {
+  
+  .links-container{
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem 0;
+  }
+
+  .nav-links-container{
+   margin: 3rem 0; 
+  }
+
+}
