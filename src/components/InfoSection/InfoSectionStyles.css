@@ -51,3 +51,18 @@
     }
   }
 }
+
+@media screen and (max-width: 790px) {
+  .info-statics{
+    
+    & .statics-text-container{
+      height: 52.5rem;
+      flex-direction: column;
+
+      & .statics-line{
+        transform: rotate(90deg);
+        top: 25rem;
+      }
+    }
+  }
+}

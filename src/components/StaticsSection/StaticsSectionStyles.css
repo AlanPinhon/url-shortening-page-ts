@@ -37,6 +37,20 @@
   }
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 790px) {
+  .statics-section{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
+    &.brand {
+      align-self: center;
+    }
+  
+    &.customizable{
+      align-self: center;
+    }
+  }
 }
