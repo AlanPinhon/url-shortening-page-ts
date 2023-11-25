@@ -66,3 +66,48 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .info-statics{
+
+    & .statics-titles{
+      width: 100%;
+
+      & .statics-title,
+      .statics-paragraph{
+        padding: 0 1rem;
+      }
+    }
+    
+    & .statics-text-container{
+      height: 57rem;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .info-statics{
+
+    & .statics-titles{
+
+      & .statics-title{
+        font-size: 1.75rem;
+        letter-spacing: -.08rem;
+        padding: 1rem;
+      }
+
+      & .statics-paragraph{
+        line-height: 1.75rem;
+      }
+    }
+    
+    & .statics-text-container{
+      height: 66rem;
+
+      & .statics-line{
+        width: 200%;
+        top: 32rem;
+      }
+    }
+  }
+}

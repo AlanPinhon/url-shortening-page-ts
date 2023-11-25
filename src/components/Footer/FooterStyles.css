@@ -80,4 +80,22 @@
    margin: 3rem 0; 
   }
 
+  .footer-social-nav{
+
+    & .social-link{
+      margin: 0 .75rem;
+    }
+  }
+
+}
+
+@media screen and (max-width: 540px) {
+  .nav-links-container{
+    flex-direction: column;
+    text-align: center;
+
+    & .footer-nav-container{
+      margin: 1rem 0;
+    }
+  }
 }

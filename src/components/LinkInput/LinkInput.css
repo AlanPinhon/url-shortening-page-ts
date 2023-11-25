@@ -89,3 +89,28 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .link-input{
+    padding: 1.25rem;
+    border-radius: .5rem;
+
+    & .shorten-link-form{
+      flex-direction: column;
+
+      & input{
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      & .shorten-btn{
+        width: 100%;
+      }
+    }
+
+    .error-msg{
+      top: 4.5rem;
+      margin-top: 0;
+    }
+  }
+}
