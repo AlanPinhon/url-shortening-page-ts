@@ -1,7 +1,7 @@
 .link-input{
   position: relative;
   border-radius: .75rem;
-  margin: 1rem auto;
+  margin-bottom: 1rem;
   padding: 3rem 4rem;
   background-color: var(--dark-violet);
   background-image: url('/assets/images/bg-shorten-desktop.svg');
@@ -59,5 +59,58 @@
     font-weight: 500;
     font-style: italic;
     margin-top: .4rem;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .link-input{
+    padding: 2rem;
+
+    & .shorten-link-form{
+
+      & input{
+        height: 3rem;
+        padding-left: 1rem;
+        font-size: 1rem;
+        border-radius: .3rem;
+      }
+
+      & .shorten-btn{
+        height: 3rem;
+        font-size: 1rem;
+        border-radius: .3rem;
+      }
+    }
+
+    .error-msg{
+      margin-top: .2rem;
+      font-size: .8rem;
+      font-weight: 400;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .link-input{
+    padding: 1.25rem;
+    border-radius: .5rem;
+
+    & .shorten-link-form{
+      flex-direction: column;
+
+      & input{
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      & .shorten-btn{
+        width: 100%;
+      }
+    }
+
+    .error-msg{
+      top: 4.5rem;
+      margin-top: 0;
+    }
   }
 }

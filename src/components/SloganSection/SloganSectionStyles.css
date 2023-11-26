@@ -32,3 +32,36 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .background-slogan{
+    height: 300px;
+    background-image: url('/assets/images/bg-boost-mobile.svg');
+    background-position: center;
+  
+    & .slogan{
+      margin: 0 auto;
+      padding: 3rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    & .slogan-text{
+      font-size: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    & .slogan-btn{
+      margin: 1rem 0;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .background-slogan{
+    & .slogan-text{
+      font-size: 1.75rem;
+    }
+  }
+}
