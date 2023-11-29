@@ -18,8 +18,11 @@
   }
 }
 
-.nav-container{
+.menu-container{
   width: 90%;
+}
+
+.nav-container{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -67,20 +70,25 @@
       }
     }
   }
-  
-  .nav-container{
+
+  .menu-container{
     position: fixed;
-    z-index: 100;
-    top: 7rem;
-    background-color: var(--dark-violet);
-    border-radius: .5rem;
-    flex-direction: column;
+    top: 0;
+    height: 100vh;
     transform: translateY(-150%);
     transition: transform 0.25s ease-in-out;
+    z-index: 100;
 
     &.show{
       transform: translateY(0);
     }
+  }
+  
+  .nav-container{
+    margin-top: 7rem;
+    background-color: var(--dark-violet);
+    border-radius: .5rem;
+    flex-direction: column;
   }
 
   .left{
