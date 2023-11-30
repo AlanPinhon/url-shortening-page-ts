@@ -2,7 +2,7 @@
   margin: 3rem auto;
   position: relative;
 
-  & .navbar{
+  & .menu{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,10 +63,12 @@
 @media screen and (max-width: 860px) {
 
   .nav-section{
-    & .navbar{
+    & .menu{
       & .menu-icon{
         display: flex;
         width: 2rem;
+        border: none;
+        background-color: var(--white);
       }
     }
   }
@@ -74,12 +76,14 @@
   .menu-container{
     position: fixed;
     top: 0;
+    opacity: 0;
     height: 100vh;
     transform: translateY(-150%);
-    transition: transform 0.25s ease-in-out;
+    transition: transform 0.5s ease-in-out;
     z-index: 100;
 
     &.show{
+      opacity: 1;
       transform: translateY(0);
     }
   }
